@@ -8,7 +8,6 @@ declare global {
   var signin: () => Promise<string[]>;
 }
 
-jest.setTimeout(60000);
 // Setup a mongo db for testing before
 // all tests start.
 let mongo: any;
@@ -25,6 +24,7 @@ beforeAll(async () => {
 // Reach into the MongoMemoryServer db
 // and reset all the data inside there.
 beforeEach(async () => {
+  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
 
   for (let collection of collections) {
